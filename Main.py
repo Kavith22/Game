@@ -2,6 +2,7 @@ import pgzrun
 import random
 WIDTH=1000
 HEIGHT=500
+SCORE = 0
 actor=Actor('alien.png')
 message='Click Alien'
 def move():
@@ -9,9 +10,12 @@ def move():
     actor.y=random.randint(100,400)
 def on_mouse_down(pos):
     global message
+    global SCORE
     if actor.collidepoint(pos):
         move()
-        message='Good'
+        
+        SCORE=SCORE+1
+        message=SCORE
     else:
         
         message='Missed'
@@ -21,6 +25,6 @@ def on_mouse_down(pos):
 def draw():
     screen.clear()
     actor.draw()
-    screen.draw.text(message,(500,250),fontsize=20)
+    screen.draw.text(str(message),(500,250),fontsize=20)
 
 pgzrun.go()
